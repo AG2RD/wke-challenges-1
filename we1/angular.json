@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "nexus",
+  "projects": {
+    "nexus": {
+      "projectType": "application",
+      "root": "apps/nexus",
+      "sourceRoot": "apps/nexus/src",
+      "prefix": "we1",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/nexus",
+            "index": "apps/nexus/src/index.html",
+            "main": "apps/nexus/src/main.ts",
+            "polyfills": "apps/nexus/src/polyfills.ts",
+            "tsConfig": "apps/nexus/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/nexus/src/favicon.ico", "apps/nexus/src/assets"],
+            "styles": ["apps/nexus/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/nexus/src/environments/environment.ts",
+                  "with": "apps/nexus/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nexus:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nexus:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nexus:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/nexus/src/**/*.ts",
+              "apps/nexus/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/nexus"],
+          "options": {
+            "jestConfig": "apps/nexus/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nexus-e2e": {
+      "root": "apps/nexus-e2e",
+      "sourceRoot": "apps/nexus-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/nexus-e2e/cypress.json",
+            "tsConfig": "apps/nexus-e2e/tsconfig.e2e.json",
+            "devServerTarget": "nexus:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nexus:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/nexus-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "pomodoro": {
+      "projectType": "application",
+      "root": "apps/pomodoro",
+      "sourceRoot": "apps/pomodoro/src",
+      "prefix": "we1",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/pomodoro",
+            "index": "apps/pomodoro/src/index.html",
+            "main": "apps/pomodoro/src/main.ts",
+            "polyfills": "apps/pomodoro/src/polyfills.ts",
+            "tsConfig": "apps/pomodoro/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/pomodoro/src/favicon.ico",
+              "apps/pomodoro/src/assets"
+            ],
+            "styles": ["apps/pomodoro/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/pomodoro/src/environments/environment.ts",
+                  "with": "apps/pomodoro/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "pomodoro:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pomodoro:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pomodoro:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pomodoro/src/**/*.ts",
+              "apps/pomodoro/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/pomodoro"],
+          "options": {
+            "jestConfig": "apps/pomodoro/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pomodoro-e2e": {
+      "root": "apps/pomodoro-e2e",
+      "sourceRoot": "apps/pomodoro-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pomodoro-e2e/cypress.json",
+            "tsConfig": "apps/pomodoro-e2e/tsconfig.e2e.json",
+            "devServerTarget": "pomodoro:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pomodoro:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pomodoro-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}

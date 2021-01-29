@@ -1,0 +1,12 @@
+{
+  "(apps|libs)/**/*.ts": [
+    "npm run eslint:staged"
+    
+  ],
+  "(apps|libs)/**/*.scss": [
+    "stylelint --syntax scss --fix"
+  ],
+  "(apps|libs)/**/*.html": [
+    "./node_modules/.bin/htmlhint www/**/*.html"
+  ],
+}

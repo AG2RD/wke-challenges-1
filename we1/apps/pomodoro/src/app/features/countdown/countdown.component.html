@@ -1,0 +1,6 @@
+<div
+  class="countdown"
+  *ngIf="{ countdown: countdown$ | async, cts: countdownState$ | async } as obs"
+>
+  {{ (obs.countdown === null ? totalDuration : obs.countdown) | time }}
+</div>

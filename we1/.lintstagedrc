@@ -1,7 +1,7 @@
 {
   "(apps|libs)/**/*.ts": [
-    "npm run eslint:staged"
-    
+    "npm run eslint"
+
   ],
   "(apps|libs)/**/*.scss": [
     "stylelint --syntax scss --fix"
